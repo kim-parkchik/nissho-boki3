@@ -1,0 +1,76 @@
+site_name: 無料で学べる 日商簿記3級
+site_description: 日商簿記3級の無料テキストと問題集。2027年度の出題範囲に対応し、予備知識ゼロから仕訳・試算表・精算表・財務諸表まで学べます。模擬試験5回分と印刷できる答案用紙つき。
+site_url: https://kim-parkchik.github.io/nissho-boki3/
+repo_url: https://github.com/kim-parkchik/nissho-boki3
+repo_name: kim-parkchik/nissho-boki3
+edit_uri: edit/main/docs/
+docs_dir: docs
+theme:
+  name: material
+  language: ja
+  features:
+    - navigation.instant
+    - navigation.top
+    - toc.follow
+    - search.highlight
+    - content.action.edit
+  palette:
+    - scheme: default
+      primary: teal
+      toggle:
+        icon: material/weather-night
+        name: ダークモードに切り替え
+    - scheme: slate
+      primary: teal
+      toggle:
+        icon: material/weather-sunny
+        name: ライトモードに切り替え
+plugins:
+  - search:
+      lang: ja
+extra_css:
+  - stylesheets/sheets.css
+markdown_extensions:
+  - tables
+  - admonition
+  - md_in_html
+  - pymdownx.superfences
+  - toc:
+      permalink: true
+      # 日本語の見出しでも GitHub と同じアンカー(#1-1-簿記とは など)になるようにする
+      slugify: !!python/object/apply:pymdownx.slugs.slugify
+        kwds:
+          case: lower
+nav:
+  - はじめに: index.md
+  - 章立てと方針: syllabus.md
+  - 第1章 簿記の基本と仕訳: chapters/01-basics.md
+  - 第2章 商品売買: chapters/02-merchandise.md
+  - 第3章 現金・預金: chapters/03-cash-deposits.md
+  - 第4章 売掛金・買掛金と電子記録債権・債務: chapters/04-receivables-payables.md
+  - 第5章 その他の債権・債務: chapters/05-other-receivables-payables.md
+  - 第6章 有形固定資産: chapters/06-fixed-assets.md
+  - 第7章 株式会社の純資産: chapters/07-equity.md
+  - 第8章 税金: chapters/08-taxes.md
+  - 第9章 収益・費用と訂正仕訳: chapters/09-accruals-corrections.md
+  - 第10章 帳簿と伝票: chapters/10-books-slips.md
+  - 第11章 試算表: chapters/11-trial-balance.md
+  - 第12章 決算整理: chapters/12-adjustments.md
+  - 第13章 精算表と財務諸表: chapters/13-worksheet-statements.md
+  - 第14章 総合問題(模擬試験):
+      - 第1回: chapters/14-mock-exam.md
+      - 第2回: chapters/14-mock-exam-2.md
+      - 第3回: chapters/14-mock-exam-3.md
+      - 第4回: chapters/14-mock-exam-4.md
+      - 第5回: chapters/14-mock-exam-5.md
+  - 答案用紙:
+      - 答案用紙の使い方: sheets/index.md
+      - 仕訳(共通): sheets/journal.md
+      - 第10章 練習問題: sheets/10-books-slips.md
+      - 第11章 練習問題: sheets/11-trial-balance.md
+      - 第13章 練習問題: sheets/13-worksheet-statements.md
+      - 模擬試験 第1回: sheets/mock-1.md
+      - 模擬試験 第2回: sheets/mock-2.md
+      - 模擬試験 第3回: sheets/mock-3.md
+      - 模擬試験 第4回: sheets/mock-4.md
+      - 模擬試験 第5回: sheets/mock-5.md

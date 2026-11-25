@@ -1,0 +1,115 @@
+/* 答案用紙(docs/sheets/)用のスタイル */
+
+/* 表を本文の幅いっぱいに広げ、列の多い表(精算表・商品有高帳)も収める */
+.md-typeset .answer-sheet .md-typeset__scrollwrap {
+  display: block;
+  margin-left: 0;
+  margin-right: 0;
+}
+.md-typeset .answer-sheet .md-typeset__table {
+  display: block;
+  padding: 0;
+}
+.md-typeset .answer-sheet table:not([class]) {
+  display: table;
+  width: 100%;
+  font-size: 0.8rem;
+  border-collapse: collapse;
+}
+.md-typeset .answer-sheet table:not([class]) th {
+  min-width: 0;
+}
+.md-typeset .answer-sheet table:not([class]) td,
+.md-typeset .answer-sheet table:not([class]) th {
+  border: 1px solid var(--md-default-fg-color--lighter);
+  padding: 0.3em 0.5em;
+}
+.md-typeset .answer-sheet table:not([class]) td {
+  height: 2.2em;
+}
+
+/* 仕訳の欄:1問(4行)ごとに太線で区切る */
+.md-typeset .answer-sheet .journal table:not([class]) tbody tr:nth-child(4n) td {
+  border-bottom: 2px solid var(--md-default-fg-color--light);
+}
+
+/* 印刷 */
+@page {
+  size: A4;
+  margin: 12mm;
+}
+@media print {
+  .md-main__inner {
+    margin-top: 0;
+  }
+  .md-content__inner {
+    margin: 0;
+    padding-top: 0;
+  }
+  .md-typeset h1 {
+    margin-bottom: 0.4em;
+    font-size: 1.4em;
+  }
+  /* 画面向けの案内文は印刷しない */
+  .md-typeset .sheet-note {
+    display: none;
+  }
+  .md-typeset .answer-sheet .md-typeset__scrollwrap {
+    overflow: visible;
+    margin-top: 0.4em;
+    margin-bottom: 0.4em;
+  }
+  .md-typeset .answer-sheet table:not([class]) {
+    font-size: 8.5pt;
+  }
+  .md-typeset .answer-sheet table:not([class]) td,
+  .md-typeset .answer-sheet table:not([class]) th {
+    border-color: #555;
+    padding: 0.15em 0.4em;
+  }
+  .md-typeset .answer-sheet table:not([class]) td {
+    height: 6.2mm;
+  }
+  .md-typeset .answer-sheet table:not([class]) tr {
+    break-inside: avoid;
+  }
+  /* 短い表(財務諸表・試算表など)は途中でページを分けない */
+  .md-typeset .answer-sheet .keep table:not([class]) {
+    break-inside: avoid;
+  }
+  /* 精算表は行が多いので少し詰める */
+  .md-typeset .answer-sheet .compact table:not([class]) td {
+    height: 5.4mm;
+  }
+  /* 仕訳の欄は、1問の4行の途中で改ページしない */
+  .md-typeset .answer-sheet .journal table:not([class]) tbody tr:not(:nth-child(4n+1)) {
+    break-before: avoid;
+  }
+  .md-typeset .answer-sheet .journal table:not([class]) tbody tr:nth-child(4n) td {
+    border-bottom: 2px solid #000;
+  }
+  /* 大問ごとに改ページ */
+  .md-typeset .answer-sheet h2 {
+    break-before: page;
+    margin-top: 0;
+  }
+  .md-typeset .answer-sheet h2:first-of-type {
+    break-before: auto;
+  }
+  .md-typeset .answer-sheet .page-break {
+    break-before: page;
+  }
+  .md-typeset .answer-sheet h2,
+  .md-typeset .answer-sheet h3,
+  .md-typeset .answer-sheet p {
+    break-after: avoid;
+  }
+  .md-typeset .headerlink {
+    display: none;
+  }
+}
+
+/* 1列目(勘定科目や番号)は折り返さない */
+.md-typeset .answer-sheet table:not([class]) td:first-child {
+  white-space: nowrap;
+}

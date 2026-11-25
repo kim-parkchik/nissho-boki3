@@ -1,0 +1,40 @@
+name: 検算とサイト公開
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: 仕訳の貸借一致を確認
+        run: python tools/check_entries.py docs/chapters/*.md
+      - name: MkDocs をインストール
+        run: pip install -r requirements.txt
+      - name: サイトをビルド
+        run: mkdocs build --strict
+
+  deploy:
+    needs: build
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: MkDocs をインストール
+        run: pip install -r requirements.txt
+      - name: GitHub Pages に公開
+        run: mkdocs gh-deploy --force
